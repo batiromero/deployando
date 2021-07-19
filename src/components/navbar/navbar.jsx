@@ -12,6 +12,7 @@ import cart from "../../assets/images/cart.png";
 import user from "../../assets/images/user.png";
 import Auto from "../searchbar/searchbar";
 import NavModal from "../navModal/navModal";
+import getUser from "../../actions/index"
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -21,11 +22,13 @@ import ShoppingCart from "../shoppingCart/ShoppingCart";
 // import { carritoEstado } from "../../actions";
 
 const Nav = () => {
+  const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
   const [carritoOn, setCarritoOn] = useState(false) 
   const productCart = useSelector((state) => state.productCart)
 
   const handleLogin = (e) => {
+
     e.preventDefault();
     setIsOpen(true);
   };
@@ -33,17 +36,17 @@ const Nav = () => {
   const { currentUser, logout } = useAuth();
 
   const handleLogOut = async () => {
+    window.localStorage.removeItem('user')
     await logout();
     setIsOpen(false);
   };
-
   let estado = JSON.parse(window.localStorage.getItem("array"))
   if(estado!== null){estado=estado.reverse()}
   // window.localStorage.setItem("array", JSON.stringify((array!=='undefined' && array!==null )? array.concat(nuevoItem) : array=[nuevoItem])); //state.productCart.concat([nuevoItem])
   if(!productCart.length&&estado){
     for(let i=0; i<estado.length;i++){
       for(let j=0;j<productCart.length;j++){
-        if(productCart.length&&estado[i]!==undefined&&estado[i].id===productCart[j].id){i=i+1}
+        if(productCart.length&&estado[i]!==undefined&&estado[i]!==null&&estado[i].id===productCart[j].id){i=i+1}
       }
       if(estado[i]!==undefined)productCart.push(estado[i])
     } // estado.forEach(e=>{if(productCart.length&&!productCart.forEach(d=> e.id!==d.id)){productCart.push(e)}})
@@ -66,7 +69,7 @@ const Nav = () => {
               <img alt="whatsapp img" src={whatsapp} width="20px" height="20px" />
             </a>
             <a href="https://www.facebook.com/" className="col-2" target='_blank' rel='noreferrer'>
-              <img alt="facebook img" src={facebook}  width="15px" height="15px"/>
+              <img alt="facebook img" src={facebook} style={{width: 'inherit'}} />
             </a>
             <a href="https://www.instagram.com/" className="col-2" target='_blank' rel='noreferrer'>
               <img alt="instagram img" src={instagram} width="20px" />
@@ -97,14 +100,14 @@ const Nav = () => {
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/micuenta">Mi cuenta</Dropdown.Item>
-                    <Dropdown.Item href="/update-profile">Cambiar contraseña</Dropdown.Item>
+                    <Dropdown.Item href="/micuenta">Edit Profile</Dropdown.Item>
+                    <Dropdown.Item href="/update-profile">Change Password</Dropdown.Item>
                     {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL ? (
 												<Dropdown.Item href="/dashboard-admin">
-													Dashboard Admin
+													Only Admin
 												</Dropdown.Item>
 											) : null}
-                    <Dropdown.Item onClick={handleLogOut}>Cerrar sesion</Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogOut}>Log Out</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
             ) :

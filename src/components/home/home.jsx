@@ -41,15 +41,15 @@ export default function Home({ location }) {
   }, [product]);
 
   const addToCart = (id) => {
+    // showalert('Producto Agregado al carrito')
     dispatch(addProductCart(id))
   }
  
   const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
-		setTimeout(() => setLoading(true), 1000)
+		setTimeout(() => setLoading(true), 400)
 	}, [])
-
 
   if(!loading) {
     return (
@@ -65,10 +65,10 @@ export default function Home({ location }) {
           {/* <div class='mt-5 mb-3' >{carritoOn===true?<ShoppingCart/>:null}</div>  */}
           <div className="div_container">
             <div class="container d-flex justify-content-center mt-50 mb-50">
-              <div class="row">
+              <div class="row container-product">
                 {allProducts &&
                   allProducts.length > 0 ? allProducts.slice((page - 1) * 9, page * 9).map((el) => {
-                   return el.stock>0? <>
+                   return el.stock>0?<>
                     <div class="col-md-4 mt-2">
                       <div class="card">
                         <div class="card-body">
@@ -78,7 +78,7 @@ export default function Home({ location }) {
                                 src={el.image}
                                 class="card-img img-fluid"
                                 height="100"
-                                alt="Loading..."
+                                alt=""
                               />
                             </Link>
                           </div>
