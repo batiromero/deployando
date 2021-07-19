@@ -37,7 +37,7 @@ export function carritoEstado() {
 
 export function getpedidosUser(id) {
   return (dispatch) => {
-    axios.get(`http://localhost:3001/admin/users/id/${id}`)
+    axios.get(`https://vinotecappversion.herokuapp.com/admin/users/id/${id}`)
       .then(response => {
         dispatch({
           type: PEDIDOSUSER,
@@ -68,7 +68,7 @@ export function addProductCart(payload) {
 
 export function getDetail(id) {
   return (dispatch) => {
-    axios.get('http://localhost:3001/admin/productos/id/' + id)
+    axios.get('https://vinotecappversion.herokuapp.com/admin/productos/id/' + id)
       .then(response => {
         dispatch({
           type: GETDETAILS,
@@ -105,7 +105,7 @@ export function ClearCart() { //ver que le pasamos al reducer
 
 export function getProducts() {
   return (dispatch) => {
-    axios.get('http://localhost:3001/productos/all')
+    axios.get('https://vinotecappversion.herokuapp.com/productos/all')
       .then(response => {
         dispatch({
           type: GETCARDS,
@@ -126,7 +126,7 @@ export function orderProduct({
 }) {
   return (dispatch) => {
     const datos = `offset=${offset}&${type}=type&${order}=order&${name}=name`
-    axios.get('http://localhost:3001/admin/productos/order?' + datos)
+    axios.get('https://vinotecappversion.herokuapp.com/admin/productos/order?' + datos)
       .then(response => {
         dispatch({
           type: ORDERPRODUCT,
@@ -141,7 +141,7 @@ export function orderProduct({
 
 export function getNames() {
   return (dispatch) => {
-    axios.get('http://localhost:3001/admin/productos/names')
+    axios.get('https://vinotecappversion.herokuapp.com/admin/productos/names')
       .then(response => {
         dispatch({
           type: GETNAMES,
@@ -158,7 +158,7 @@ export function getNames() {
 //USUARIOS GET, POST Y PUT y DELETE
 export function getAllUsers() {
   return (dispatch) => {
-    axios.get("http://localhost:3001/admin/users/all")
+    axios.get("https://vinotecappversion.herokuapp.com/admin/users/all")
       .then((response) => {
         dispatch({
           type: GET_ALL_USERS,
@@ -173,7 +173,7 @@ export function getAllUsers() {
 
 export function getUserDetails(id) {
   return (dispatch) => {
-    axios.get("http://localhost:3001/admin/users/id/" + id)
+    axios.get("https://vinotecappversion.herokuapp.com/admin/users/id/" + id)
       .then((response) => {
         dispatch({
           type: GET_USER_DETAILS,
@@ -188,16 +188,16 @@ export function getUserDetails(id) {
 
 export function postUsuarios(usuario) {
   return (dispatch) => {
-    axios.post('http://localhost:3001/admin/clientesPost', usuario)
+    axios.post('https://vinotecappversion.herokuapp.com/admin/clientesPost', usuario)
   }
 }
 
 // export function putUsuarios(usuario) {
-//   axios.put(`http://localhost:3001/admin/users/${usuario.id}`, usuario)
+//   axios.put(`https://vinotecappversion.herokuapp.com/admin/users/${usuario.id}`, usuario)
 export function putUsuarios(id, usuario) {
   return (dispatch) => {
     console.log(id, usuario)
-    axios.put("http://localhost:3001/admin/users/" + id, usuario)
+    axios.put("https://vinotecappversion.herokuapp.com/admin/users/" + id, usuario)
       .then((response) => {
         dispatch({
           type: PUT_USER,
@@ -211,18 +211,18 @@ export function putUsuarios(id, usuario) {
 }
 
 export function deleteUsuarios(id) {
-  axios.delete(`http://localhost:3001/admin/client/${id}`)
+  axios.delete(`https://vinotecappversion.herokuapp.com/admin/client/${id}`)
 }
 
 //PRODUCTOS POST, PUT, DELETE Y GET DETAILS
 export function addProduct(product) {
   //   return (dispatch) => {
-  //     axios.post('http://localhost:3001/admin/productos', product)
+  //     axios.post('https://vinotecappversion.herokuapp.com/admin/productos', product)
   //   }
   // }
   // }
   return (dispatch) => {
-    axios.post("http://localhost:3001/admin/productos", product)
+    axios.post("https://vinotecappversion.herokuapp.com/admin/productos", product)
       .then((response) => {
         if (response) alert('El producto se creó correctamente');
         dispatch({
@@ -236,9 +236,9 @@ export function addProduct(product) {
   };
 }
 // export async function editProduct(id, payload) {
-//   await axios.put('http://localhost:3001/admin/productos/' + id, payload)
+//   await axios.put('https://vinotecappversion.herokuapp.com/admin/productos/' + id, payload)
 export async function editProduct(id, payload) {
-  await axios.put("http://localhost:3001/admin/productos/" + id, payload)
+  await axios.put("https://vinotecappversion.herokuapp.com/admin/productos/" + id, payload)
     .then((response) => {
       if (response) alert('El producto se modificó correctamente');
     })
@@ -247,9 +247,9 @@ export async function editProduct(id, payload) {
     });
 }
 // export async function deleteProduct(id) {
-//   await axios.delete(`http://localhost:3001/admin/producto/${id}`)
+//   await axios.delete(`https://vinotecappversion.herokuapp.com/admin/producto/${id}`)
 export async function deleteProduct(id) {
-  await axios.delete(`http://localhost:3001/admin/producto/${id}`)
+  await axios.delete(`https://vinotecappversion.herokuapp.com/admin/producto/${id}`)
     .then((response) => {
       if (response) alert('El producto se eliminó correctamente');
     })
@@ -261,7 +261,7 @@ export async function deleteProduct(id) {
 //PEDIDOS
 export function getAllPedidos() {
   return (dispatch) => {
-    axios.get('http://localhost:3001/admin/pedidos/all')
+    axios.get('https://vinotecappversion.herokuapp.com/admin/pedidos/all')
       .then(response => {
         dispatch({
           type: GETALLPEDIDOS,
@@ -276,7 +276,7 @@ export function getAllPedidos() {
 export function getPedidosByState(state) {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3001/admin/pedidos/filter?valor=" + state)
+      const response = await axios.get("https://vinotecappversion.herokuapp.com/admin/pedidos/filter?valor=" + state)
         .then(response => {
           dispatch({
             type: GETPEDIDOSBYSTATE,
@@ -306,7 +306,7 @@ export function deleteLocalStorage(payload) {
 
 export function getPedidoDetail(id) {
   return (dispatch) => {
-    axios.get('http://localhost:3001/admin/detallePedido/' + id)
+    axios.get('https://vinotecappversion.herokuapp.com/admin/detallePedido/' + id)
       .then(response => {
         dispatch({
           type: GETPEDIDODETAIL,
@@ -321,7 +321,7 @@ export function getPedidoDetail(id) {
 
 export function putPedido(id, payload) {
   return (dispatch) => {
-    axios.put(`http://localhost:3001/admin/pedidos/id/${id}`, payload)
+    axios.put(`https://vinotecappversion.herokuapp.com/admin/pedidos/id/${id}`, payload)
       .then(response => {
         dispatch({
           type: PUTPEDIDO,
@@ -337,7 +337,7 @@ export function putPedido(id, payload) {
   export function createUser(obj){
     return (dispatch)=>{
       try{
-        axios.post('http://localhost:3001/admin/clientesPost',obj)
+        axios.post('https://vinotecappversion.herokuapp.com/admin/clientesPost',obj)
       .then((response)=>{
       window.localStorage.setItem("user",JSON.stringify(response.data));  
         return dispatch({ type:POST_USER,Payload:response.data})})
@@ -356,7 +356,7 @@ export function putPedido(id, payload) {
 
 // export function getNamesQuery(name){
 //     return (dispatch) => {
-//         axios.get('http://localhost:3001/productos/?name='+ name)
+//         axios.get('https://vinotecappversion.herokuapp.com/productos/?name='+ name)
 //         .then(response => {
 //             dispatch({ type: GETNAMESQ, payload: response.data})
 //         })
